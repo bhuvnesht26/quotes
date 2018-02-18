@@ -1,4 +1,4 @@
-
+var htmlData;
 
 document.addEventListener("DOMContentLoaded", function(){
     var ourRequest = new XMLHttpRequest();
@@ -39,7 +39,7 @@ function quotesTemplate(quotes) {
 
 var globalIndex = 0;
 
-function nextListener(htmlData) {
+function nextListener() {
     globalIndex = globalIndex + 1;
     document.getElementById("quotes-container").innerHTML = `
       ${quotesTemplate(htmlData[globalIndex])}
@@ -48,7 +48,7 @@ function nextListener(htmlData) {
 }
 
 
-function renderHTML(htmlData) {
+function renderHTML() {
 document.getElementById("quotes-container").innerHTML = `
   ${quotesTemplate(htmlData[globalIndex])}
 `;
