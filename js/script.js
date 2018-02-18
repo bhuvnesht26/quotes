@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
         if (ourRequest.status >= 200 && ourRequest.status < 400) {
         // This is where we'll do something with the retrieved data
             htmlData = JSON.parse(ourRequest.responseText);
-            renderHTML();
+            renderHTML(htmlData);
             } else {
                     console.log("We connected to the server, but it returned an error.");
                 }
@@ -48,7 +48,7 @@ function nextListener() {
 }
 
 
-function renderHTML() {
+function renderHTML(htmlData) {
 document.getElementById("quotes-container").innerHTML = `
   ${quotesTemplate(htmlData[globalIndex])}
 `;
