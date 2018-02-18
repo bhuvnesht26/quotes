@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
         if (ourRequest.status >= 200 && ourRequest.status < 400) {
         // This is where we'll do something with the retrieved data
             htmlData = JSON.parse(ourRequest.responseText);
-            renderHTML(htmlData);
+            renderHTML();
             } else {
                     console.log("We connected to the server, but it returned an error.");
                 }
@@ -22,16 +22,19 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 function quotesTemplate(quotes) {
-  return `   
+  return `
 <div class="card">
+  <div class="slides">
    <div class="slide">
       <div class="thumbnail"><i class="fas fa-quote-left fa-5x"></i></div>
       <h1 class="title">${quotes.quoteText}</h1>
       <p class="description">${quotes.quoteAuthor} </p>
     </div>
-  <div class="footer">
-    <button id="prev" class="btn">Prev</button>
-    <button id="next" class="btn">Next</button>
+    <div>
+      <button id="next-button">
+        next
+      </button>
+    </div>
   </div>
 </div>
   `;
@@ -44,13 +47,13 @@ function nextListener() {
     document.getElementById("quotes-container").innerHTML = `
       ${quotesTemplate(htmlData[globalIndex])}
     `;
-    document.getElementById("next").addEventListener( "click", nextListener );
+    document.getElementById("next-button").addEventListener( "click", nextListener );
 }
 
 
-function renderHTML(htmlData) {
+function renderHTML() {
 document.getElementById("quotes-container").innerHTML = `
   ${quotesTemplate(htmlData[globalIndex])}
 `;
-  document.getElementById("next").addEventListener( "click", nextListener );
+  document.getElementById("next-button").addEventListener( "click", nextListener );
 }
