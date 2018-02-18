@@ -30,8 +30,8 @@ function quotesTemplate(quotes) {
       <p class="description">${quotes.quoteAuthor} </p>
     </div>
   <div class="footer">
-    <button id="prev" class="btn">Prev</button>
-    <button id="next" class="btn">Next</button>
+    <button id="prev" class="btn" onclick="prevListener()">Prev</button>
+    <button id="next" class="btn" onclick="nextListener()">Next</button>
   </div>
 </div>
   `;
@@ -44,7 +44,15 @@ function nextListener() {
     document.getElementById("quotes-container").innerHTML = `
       ${quotesTemplate(htmlData[globalIndex])}
     `;
-    document.getElementById("next").addEventListener( "click", nextListener );
+}
+
+function prevListener() {
+    if(globalIndex!=0){
+         globalIndex = globalIndex - 1;
+        document.getElementById("quotes-container").innerHTML = `
+        ${quotesTemplate(htmlData[globalIndex])}
+        `;
+    }
 }
 
 
@@ -52,5 +60,5 @@ function renderHTML() {
 document.getElementById("quotes-container").innerHTML = `
   ${quotesTemplate(htmlData[globalIndex])}
 `;
-  document.getElementById("next").addEventListener( "click", nextListener );
+    
 }
