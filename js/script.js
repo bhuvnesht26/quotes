@@ -24,19 +24,33 @@ document.addEventListener("DOMContentLoaded", function(){
 function quotesTemplate(quotes) {
   return `   
 <div class="card">
-  <div class="slides">
    <div class="slide">
       <div class="thumbnail"><i class="fas fa-quote-left fa-5x"></i></div>
       <h1 class="title">${quotes.quoteText}</h1>
       <p class="description">${quotes.quoteAuthor} </p>
     </div>
+  <div class="footer">
+    <button id="prev" class="btn">Prev</button>
+    <button id="next" class="btn">Next</button>
   </div>
 </div>
   `;
 }
 
+var globalIndex = 0;
+
+function nextListener(htmlData) {
+    globalIndex = globalIndex + 1;
+    document.getElementById("quotes-container").innerHTML = `
+      ${quotesTemplate(htmlData[globalIndex])}
+    `;
+    document.getElementById("next").addEventListener( "click", nextListener );
+}
+
+
 function renderHTML(htmlData) {
 document.getElementById("quotes-container").innerHTML = `
-  ${htmlData.map(quotesTemplate).join("")}
+  ${quotesTemplate(htmlData[globalIndex])}
 `;
+  document.getElementById("next").addEventListener( "click", nextListener );
 }
